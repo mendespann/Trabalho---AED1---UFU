@@ -4,7 +4,7 @@
 #include "Lista.h"
 #define MAXS 20
 #cade o Rafa
-
+# estou aqui !!!!! 
 struct strLista{
 	char arrStr[25][16];
 	int fim; // indica qnts string tenho na Listaa

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "ListaInt.h"
+#include "lista.h"
 
 // Prototipo da função imprime_lista.
 void imprime_lista(Lista);
@@ -9,7 +9,7 @@ int main(){
 int op; // Variavel responsavel por receber a opção desejada do menu
 int flag = 0,flag2 = 0; //Flag contabiliza a quantidade de especificações da lista (0 - lista nao criada | 1 - Lista criada)
 int resp; // Variavel responsavel por selecionar se a operação será realizada na lista 1 ou lista 2
-Lista l; Lista l2; Lista l3; // Declaração das "listas".
+Lista *l1; Lista *l2; Lista *l3; // Declaração das "listas".
 
     do{ // Programa
         do{ //Menu
@@ -53,8 +53,8 @@ Lista l; Lista l2; Lista l3; // Declaração das "listas".
                 scanf("%d", &resp);
 
                 if (resp == 1){
-                    l = cria_lista();
-                    if(l == NULL){
+                    l1 = cria_lista();
+                    if(l1 == NULL){
                         printf("\n Falha na criacao da lista");
                         return -1;
                 }
@@ -82,7 +82,7 @@ Lista l; Lista l2; Lista l3; // Declaração das "listas".
             printf("\n Digite [1] para esvaziar a lista 1 e [2] para esvaziar a lista 2: \n");
             scanf("%d", &resp);
             if (resp == 1){
-                if(esvazia_lista(l) == 0){
+                if(esvazia_lista(*l1) == 0){
                     printf("\n Nao foi possivel esvaziar a lista.");
                     return -1;
             }
@@ -104,7 +104,7 @@ Lista l; Lista l2; Lista l3; // Declaração das "listas".
                 break;
             }
         }
-
+        /*
         case 3:{ // Apagar
             printf("\n Digite [1] para apagar na lista 1 e [2] para apagar na lista 2: \n");
             scanf("%d", &resp);
@@ -130,7 +130,7 @@ Lista l; Lista l2; Lista l3; // Declaração das "listas".
                         printf("\n Opção inválida");
                         break;
                         }
-                    }
+                    }*/
 
         case 4:{ //Inserir elemento na lista
             int n; //Elemento digitado
@@ -142,14 +142,14 @@ Lista l; Lista l2; Lista l3; // Declaração das "listas".
 
             // Tratamentos:
             if (resp == 1){
-                if (insere_elem(l,n) == 0)
+                if (inserir_elem(1l,n) == 0)
                 printf("\n A lista esta cheia! Nao foi possivel incluir o elemento %d. ",n);
             else
                 printf("\n O elemento %d foi incluido com sucesso! ",n);
             break;
                 }
                 else if(resp == 2){
-                if (insere_elem(l2,n) == 0){
+                if (inserir_elem(l2,n) == 0){
                     printf("\n A lista esta cheia! Nao foi possivel incluir o elemento %d. ",n);
                     }else{
                         printf("\n O elemento %d foi incluido com sucesso! ",n);
@@ -171,8 +171,8 @@ Lista l; Lista l2; Lista l3; // Declaração das "listas".
              scanf("%d", &resp);
 
                 if (resp == 1){
-                if(remove_elem(l,n) == 0){
-                    if(lista_vazia(l) == 1)
+                if(remove_todas(l1,n) == 0){
+                    if(lista_vazia(l1) == 1)
                         printf("\n A lista 1 ja esta vazia!");
                     else
                         printf("\n Nao existe o elemento %d na lista! ",n);
@@ -182,7 +182,7 @@ Lista l; Lista l2; Lista l3; // Declaração das "listas".
                     break;
                 }
                 else if(resp == 2){
-                    if(remove_elem(l2,n) == 0){
+                    if(remove_todas(l2,n) == 0){
                         if(lista_vazia(l2) == 1)
                             printf("\n A lista 2 ja esta vazia!");
                     else
@@ -197,7 +197,7 @@ Lista l; Lista l2; Lista l3; // Declaração das "listas".
                 break;
                 }
         }
-
+        /*
         case 6:{ // Imprime a lista
              printf("\n Digite [1] para imprimir a lista 1 e [2] para imprimir a lista 2 e [3] para imprimir ambas as listas: \n");
              scanf("%d", &resp);
@@ -221,41 +221,49 @@ Lista l; Lista l2; Lista l3; // Declaração das "listas".
             }
 
 
-        }
-        case 7:{ // Remove os negativos
+        }*/
+        /*
+        case 7:{ // Remove posição
+            int pos;
+            printf("\n Digite a posição a ser removida: \n");
+            scanf("%d", &pos);
             printf("\n Digite [1] para remover negativos da lista 1 e [2] para remover negativos da lista 2: \n");
             scanf("%d", &resp);
 
 
+
             if (resp == 1){
-                remove_negativos(l);
+                remove_pos(l,pos);
                 break;
             }else if(resp == 2){
-                remove_negativos(l2);
+                remove_pos(l2,pos);
                 break;
             }else{
                 printf("\n Opção inválida");
                 break;
         }
-        }
-        case 8:{ // Remove os pares
+        }*/
+        case 8:{ // Tamanho
             printf("\n Digite [1] para remover pares da lista 1 e [2] para remover pares da lista 2: \n");
-                scanf("%d", &resp);
+            scanf("%d", &resp);
+            int tam;
 
                 if (resp == 1){
-                    remove_pares(l);
+                    tam = tamanho_lista(l1);
+                    printf("Tamanho da lista 1 eh: %d\n");
                     break;
                 }else if(resp == 2){
-                    remove_pares(l2);
+                    tam = tamanho_lista(l2);
+                    printf("Tamanho da lista 2 eh: %d\n");
                     break;
                 }else{
                  printf("\n Opção inválida");
                  break;
                  }
         }
-
+        /*
         case 9:{ // Intercala as listas
-           l3 =  intercala_listas(l,l2);
+           l3 =  intercala_listas(l1,l2);
             imprime_lista(l3);
             break;
         }
@@ -263,30 +271,30 @@ Lista l; Lista l2; Lista l3; // Declaração das "listas".
         case 10:{
         int tamanho; // Variavel que receberá o tamanho da lista.
         printf("\n Digite [1] para verificar o tamanho da lista 1 e [2] para verificar o tamanho da lista 2: \n");
-             scanf("%d", &resp);
+        scanf("%d", &resp);
 
                 if (resp == 1){
-                tamanho_lista(l,&tamanho);
+                tamanho_lista(l1);
                 break;
                 }
                 else if(resp == 2){
-                tamanho_lista(l,&tamanho);
+                tamanho_lista(l2);
                 break;
             }else{
                printf("\n Opcao invalida! Tente novamente");
                 break;
             }
 
-        }
+        }*/
 
         }
         }while(op != 11);
 
-        printf("\n\n\t\t FIM DE PROGRAMA! \n");
+        printf("\n\n\t\t Game Over! \n");
 
-        libera(l); //Liberar o espaço alocado para as listas.
-        libera(l2);
-        libera(l3);
+        free(l1); //Liberar o espaço alocado para as listas.
+        free(l2);
+        free(l3);
 
         return 0;
 }
@@ -302,7 +310,7 @@ Operação: imprime_lista
 - Pós-condição: Sem pós-condição.
 
 */
-
+/*
 void imprime_lista(Lista l){
     if(lista_vazia(l) == 1){
         printf("\n Lista VAZIA! ");
@@ -314,7 +322,7 @@ void imprime_lista(Lista l){
     int i;
     for(i=1;;i++){ //Não sei quantos elementos tem na lista
         int n; // N representa o elemento presente na lista
-        if(get_elem_pos(l,i,&n) == 0){ //Não existe a posição
+        if(getPos(l,i,&n) == 0){ //Não existe a posição
             break;
         }
         printf(" %d ",n);
@@ -322,3 +330,4 @@ void imprime_lista(Lista l){
     }
     printf("} \n Existem %d elementos na lista. \n",i-1); // i-1 será pq o break está dentro do for.
 }
+*/

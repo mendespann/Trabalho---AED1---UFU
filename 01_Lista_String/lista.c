@@ -3,6 +3,7 @@
 #include <string.h>
 #include "Lista.h"
 #define MAXS 20
+#cade o Rafa
 
 struct strLista{
 	char arrStr[25][16];
@@ -118,7 +119,7 @@ int remove_todas(Lista* lst, char elem[]){
         if ( strcmp(lst->arrStr[i],elem) == 0 ) {
 
             for (int j = i; j < lst->fim-1; j++)
-                strcpy(lst->arrStr[j],lst->arrStr[j+1]); // Deslocamento dos nós sucessores.
+                strcpy(lst->arrStr[j],lst->arrStr[j+1]); // Deslocamento dos nÃ³s sucessores.
 
             lst->fim--;
             i--;
